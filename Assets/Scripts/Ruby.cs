@@ -62,4 +62,9 @@ public class Ruby : MonoBehaviour
             rubyAnimation.SetFloat("Look Y", verticalInput);
         }
     }
+
+    private void LaunchBullet()
+    {
+
+    }
 }
