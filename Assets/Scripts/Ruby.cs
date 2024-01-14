@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,27 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Ruby : MonoBehaviour
 {
+    #region Ruby_Variables
     [SerializeField]
     private Animator rubyAnimation;
 
-    [SerializeField] 
+    [SerializeField]
     private float moveSpeed;
 
     private float horizontalInput;
     private float verticalInput;
 
-    [SerializeField] 
+    [SerializeField]
     private Rigidbody2D rb;
+    #endregion
+
+    #region Bullet_variables
+    [Header("Keybinds")]
+    public KeyCode shootKey = KeyCode.J;
+
+    public CogBullet bullet;
+    public Transform launchOffSet;
+    #endregion
 
     void Start()
     {
@@ -29,24 +40,26 @@ public class Ruby : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         AnimationControl();
+
+        AttackControl();
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2 (horizontalInput * moveSpeed, verticalInput * moveSpeed);
+        rb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
     }
 
     private void AnimationControl()
     {
         RunningControl();
-        FacingDirectionControl();
     }
 
     private void RunningControl()
     {
-        if(horizontalInput != 0 || verticalInput != 0)
+        if (horizontalInput != 0 || verticalInput != 0)
         {
             rubyAnimation.SetFloat("Speed", moveSpeed);
+            FacingDirectionControl();
         }
         else
         {
@@ -56,10 +69,19 @@ public class Ruby : MonoBehaviour
 
     private void FacingDirectionControl()
     {
-        if(horizontalInput != 0 || verticalInput != 0)
+
+
+        //Basic
+        rubyAnimation.SetFloat("Look X", horizontalInput);
+        rubyAnimation.SetFloat("Look Y", verticalInput);
+    }
+
+    private void AttackControl()
+    {
+        if(Input.GetKeyDown(shootKey))
         {
-            rubyAnimation.SetFloat("Look X", horizontalInput);
-            rubyAnimation.SetFloat("Look Y", verticalInput);
+            
+            Instantiate(bullet, launchOffSet.position, transform.rotation);
         }
     }
 }
