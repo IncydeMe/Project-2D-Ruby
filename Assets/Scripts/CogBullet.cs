@@ -5,6 +5,9 @@ using UnityEngine;
 public class CogBullet : MonoBehaviour
 {
     [SerializeField]
+    private Rigidbody2D rb;
+
+    [SerializeField]
     private float bulletSpeed;
 
     [SerializeField]
@@ -12,19 +15,15 @@ public class CogBullet : MonoBehaviour
 
     private float damage;
 
-    private Vector3 fireDirection;
-    
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        BulletMovement();
         BulletExpired();
-    }
-
-    private void BulletMovement()
-    {
-        transform.position += fireDirection * Time.deltaTime * bulletSpeed;
     }
 
     private void BulletExpired()
@@ -36,8 +35,8 @@ public class CogBullet : MonoBehaviour
         }
     }
 
-    public void ChangeFireDirection(Vector3 direction)
+    public void Launch(Vector2 direction)
     {
-        fireDirection = direction;
+        rb.velocity = direction * bulletSpeed;    
     }
 }

@@ -2037,37 +2037,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!1 &423101409
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 423101410}
-  m_Layer: 0
-  m_Name: LaunchOffSet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &423101410
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423101409}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.039, y: 0.478, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 257203678534660455}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &924541230
 GameObject:
   m_ObjectHideFlags: 0
@@ -66635,7 +66604,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2766057572427183967, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.2806
+      value: -7.254
       objectReference: {fileID: 0}
     - target: {fileID: 2766057572427183967, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
       propertyPath: m_LocalPosition.y
@@ -66676,32 +66645,16 @@ PrefabInstance:
     - target: {fileID: 3456760882515261126, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 2896050293298014905, guid: 825f861cf66116b46b94f4e32f0b3f73, type: 3}
-    - target: {fileID: 3456760882515261126, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
-      propertyPath: cogBullet
-      value: 
       objectReference: {fileID: 56868192033034325, guid: 825f861cf66116b46b94f4e32f0b3f73, type: 3}
-    - target: {fileID: 3456760882515261126, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
-      propertyPath: launchOffSet
-      value: 
-      objectReference: {fileID: 423101410}
     - target: {fileID: 5159648445825579113, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
       propertyPath: m_Name
       value: Ruby
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2766057572427183967, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 423101410}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
---- !u!4 &257203678534660455 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2766057572427183967, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
-  m_PrefabInstance: {fileID: 257203678534660454}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &692407030614574319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66710,10 +66663,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 133187341751018155, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 62657efa087698744a85d49522ff9506, type: 2}
     - target: {fileID: 522702564397964173, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.766
@@ -66757,14 +66706,6 @@ PrefabInstance:
     - target: {fileID: 4477800256257931841, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125809952929586265, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
-      propertyPath: m_Size.y
-      value: 1.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125809952929586265, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.86
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

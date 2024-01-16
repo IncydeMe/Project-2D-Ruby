@@ -113,6 +113,7 @@ Transform:
   - {fileID: 2035995453948000542}
   - {fileID: 3665979518580665383}
   - {fileID: 7338536133528949164}
+  - {fileID: 2651888008529510223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7620395178815045483
@@ -203,6 +204,10 @@ MonoBehaviour:
   rubyAnimation: {fileID: 6851777505627526180}
   moveSpeed: 10
   rb: {fileID: 6271625588907242767}
+  shootKey: 106
+  bullet: {fileID: 0}
+  bulletRb: {fileID: 6973006779634431669, guid: 825f861cf66116b46b94f4e32f0b3f73, type: 3}
+  launchOffSet: {fileID: 2651888008529510223}
 --- !u!50 &6271625588907242767
 Rigidbody2D:
   serializedVersion: 4
@@ -230,6 +235,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &6442479725927797901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2651888008529510223}
+  m_Layer: 0
+  m_Name: LaunchOffSet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2651888008529510223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442479725927797901}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.022, y: 0.546, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2766057572427183967}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7483961513759571216
 GameObject:
   m_ObjectHideFlags: 0

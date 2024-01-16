@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
+using TMPro;
 using UnityEngine;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
@@ -18,13 +20,16 @@ public class Ruby : MonoBehaviour
 
     [SerializeField]
     private Rigidbody2D rb;
+
+    Vector2 lookDirection = new Vector2 (1f, 0f);
     #endregion
 
     #region Bullet_variables
     [Header("Keybinds")]
     public KeyCode shootKey = KeyCode.J;
 
-    public CogBullet bullet;
+    public GameObject bullet;
+    public Rigidbody2D bulletRb;
     public Transform launchOffSet;
     #endregion
 
@@ -36,22 +41,23 @@ public class Ruby : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        //Get movement input
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
 
-        AnimationControl();
-
-        AttackControl();
+        ActionControl(); 
     }
+
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
     }
 
-    private void AnimationControl()
+    private void ActionControl()
     {
         RunningControl();
+        AttackControl();
     }
 
     private void RunningControl()
@@ -68,20 +74,30 @@ public class Ruby : MonoBehaviour
     }
 
     private void FacingDirectionControl()
-    {
-
-
-        //Basic
-        rubyAnimation.SetFloat("Look X", horizontalInput);
+    {        
+        if(horizontalInput < 0)
+        {
+            rubyAnimation.SetFloat("Look X", -1);
+        }
+        else
+        {
+            rubyAnimation.SetFloat("Look X", horizontalInput);
+        }
         rubyAnimation.SetFloat("Look Y", verticalInput);
+
+        lookDirection.Set(horizontalInput, verticalInput);
     }
 
     private void AttackControl()
     {
-        if(Input.GetKeyDown(shootKey))
+        if (Input.GetKeyDown(shootKey))
         {
-            
-            Instantiate(bullet, launchOffSet.position, transform.rotation);
+            GameObject projectileObject = Instantiate(bullet, launchOffSet.position, transform.rotation);
+            CogBullet cogBullet = projectileObject.GetComponent<CogBullet>();
+            cogBullet.Launch(lookDirection);
+
+            rubyAnimation.SetTrigger("Launch");
         }
     }
+
 }
