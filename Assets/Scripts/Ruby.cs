@@ -1,65 +1,89 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
+using TMPro;
 using UnityEngine;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Ruby : MonoBehaviour
 {
+    #region Ruby_Variables
     [SerializeField]
     private Animator rubyAnimation;
 
-    [SerializeField] 
+    [SerializeField]
     private float moveSpeed;
 
     private float horizontalInput;
     private float verticalInput;
 
-    [SerializeField] 
+    [SerializeField]
     private Rigidbody2D rb;
+
+    Vector2 lookDirection = new Vector2(1f, 0f);
+    #endregion
+
+    #region Bullet_variables
+    [Header("Keybinds")]
+    public KeyCode shootKey = KeyCode.J;
+
+    public GameObject bullet;
+    public Rigidbody2D bulletRb;
+    public Transform launchOffSet;
+    #endregion
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
     }
 
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        //Get movement input
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
 
-        AnimationControl();
+        ActionControl();
     }
+
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2 (horizontalInput * moveSpeed, verticalInput * moveSpeed);
+        rb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
     }
 
-    private void AnimationControl()
+    private void ActionControl()
     {
         RunningControl();
-        FacingDirectionControl();
+        AttackControl();
     }
 
     private void RunningControl()
     {
-        if(horizontalInput != 0 || verticalInput != 0)
+        Vector2 move = new Vector2(horizontalInput, verticalInput);
+
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
-            rubyAnimation.SetFloat("Speed", moveSpeed);
+            lookDirection.Set(move.x, move.y);
+            lookDirection.Normalize();
         }
-        else
+
+        rubyAnimation.SetFloat("Look X", lookDirection.x);
+        rubyAnimation.SetFloat("Look Y", lookDirection.y);
+        rubyAnimation.SetFloat("Speed", move.magnitude);
+    }
+
+    private void AttackControl()
+    {
+        if (Input.GetKeyDown(shootKey))
         {
-            rubyAnimation.SetFloat("Speed", 0);
+            GameObject projectileObject = Instantiate(bullet, launchOffSet.position, transform.rotation);
+            CogBullet cogBullet = projectileObject.GetComponent<CogBullet>();
+            cogBullet.Launch(lookDirection);
+
+            rubyAnimation.SetTrigger("Launch");
         }
     }
 
-    private void FacingDirectionControl()
-    {
-        if(horizontalInput != 0 || verticalInput != 0)
-        {
-            rubyAnimation.SetFloat("Look X", horizontalInput);
-            rubyAnimation.SetFloat("Look Y", verticalInput);
-        }
-    }
 }
