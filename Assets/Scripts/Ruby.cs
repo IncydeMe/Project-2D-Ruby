@@ -21,7 +21,7 @@ public class Ruby : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb;
 
-    Vector2 lookDirection = new Vector2 (1f, 0f);
+    Vector2 lookDirection = new Vector2(1f, 0f);
     #endregion
 
     #region Bullet_variables
@@ -35,7 +35,6 @@ public class Ruby : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
     }
 
@@ -45,7 +44,7 @@ public class Ruby : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        ActionControl(); 
+        ActionControl();
     }
 
 
@@ -62,30 +61,17 @@ public class Ruby : MonoBehaviour
 
     private void RunningControl()
     {
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
-            rubyAnimation.SetFloat("Speed", moveSpeed);
-            FacingDirectionControl();
-        }
-        else
-        {
-            rubyAnimation.SetFloat("Speed", 0);
-        }
-    }
+        Vector2 move = new Vector2(horizontalInput, verticalInput);
 
-    private void FacingDirectionControl()
-    {        
-        if(horizontalInput < 0)
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
-            rubyAnimation.SetFloat("Look X", -1);
+            lookDirection.Set(move.x, move.y);
+            lookDirection.Normalize();
         }
-        else
-        {
-            rubyAnimation.SetFloat("Look X", horizontalInput);
-        }
-        rubyAnimation.SetFloat("Look Y", verticalInput);
 
-        lookDirection.Set(horizontalInput, verticalInput);
+        rubyAnimation.SetFloat("Look X", lookDirection.x);
+        rubyAnimation.SetFloat("Look Y", lookDirection.y);
+        rubyAnimation.SetFloat("Speed", move.magnitude);
     }
 
     private void AttackControl()
