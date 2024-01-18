@@ -52860,6 +52860,16 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 1
+--- !u!50 &1694402053 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 4421132914970239280, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+  m_PrefabInstance: {fileID: 692407030614574319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1694402054 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 133187341751018155, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+  m_PrefabInstance: {fileID: 692407030614574319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1755514049
 GameObject:
   m_ObjectHideFlags: 0
@@ -66604,11 +66614,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2766057572427183967, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.254
+      value: -24.05
       objectReference: {fileID: 0}
     - target: {fileID: 2766057572427183967, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1421
+      value: -4.14
       objectReference: {fileID: 0}
     - target: {fileID: 2766057572427183967, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
       propertyPath: m_LocalPosition.z
@@ -66650,11 +66660,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ruby
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8646671728602085426, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3456760882515261126, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5159648445825579113, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 257203678534660459}
   m_SourcePrefab: {fileID: 100100000, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+--- !u!1 &257203678534660455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5159648445825579113, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+  m_PrefabInstance: {fileID: 257203678534660454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &257203678534660456 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2651888008529510223, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+  m_PrefabInstance: {fileID: 257203678534660454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &257203678534660457 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6271625588907242767, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+  m_PrefabInstance: {fileID: 257203678534660454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &257203678534660458 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6851777505627526180, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+  m_PrefabInstance: {fileID: 257203678534660454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &257203678534660459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257203678534660455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8c3bad33ef2d542a2706a620444c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rubyAnimation: {fileID: 257203678534660458}
+  moveSpeed: 8
+  rb: {fileID: 257203678534660457}
+  shootKey: 106
+  bullet: {fileID: 56868192033034325, guid: 825f861cf66116b46b94f4e32f0b3f73, type: 3}
+  bulletRb: {fileID: 6973006779634431669, guid: 825f861cf66116b46b94f4e32f0b3f73, type: 3}
+  launchOffSet: {fileID: 257203678534660456}
 --- !u!1001 &692407030614574319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66665,11 +66722,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 522702564397964173, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.766
+      value: -23.81
       objectReference: {fileID: 0}
     - target: {fileID: 522702564397964173, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.217
+      value: -11.7
       objectReference: {fileID: 0}
     - target: {fileID: 522702564397964173, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -66703,9 +66760,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1003815569430962013, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+      propertyPath: ruby
+      value: 
+      objectReference: {fileID: 257203678534660455}
+    - target: {fileID: 1003815569430962013, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+      propertyPath: enermyRb
+      value: 
+      objectReference: {fileID: 1694402053}
+    - target: {fileID: 1003815569430962013, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003815569430962013, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+      propertyPath: distanceBetween
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003815569430962013, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+      propertyPath: enermyAnimation
+      value: 
+      objectReference: {fileID: 1694402054}
+    - target: {fileID: 4421132914970239280, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4477800256257931841, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8719706088623161737, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8719706088623161737, guid: 5e52465999930f243ba463c7614d42e1, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

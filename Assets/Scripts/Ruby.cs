@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO.Pipes;
-using TMPro;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Ruby : MonoBehaviour
 {
@@ -85,5 +81,4 @@ public class Ruby : MonoBehaviour
             rubyAnimation.SetTrigger("Launch");
         }
     }
-
 }
