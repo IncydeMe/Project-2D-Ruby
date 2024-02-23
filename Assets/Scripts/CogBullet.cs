@@ -5,7 +5,7 @@ using UnityEngine;
 public class CogBullet : MonoBehaviour
 {
     [SerializeField]
-    private Rigidbody2D rb;
+    private Rigidbody2D bulletRb;
 
     [SerializeField]
     private float bulletSpeed;
@@ -17,7 +17,7 @@ public class CogBullet : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        bulletRb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -37,6 +37,35 @@ public class CogBullet : MonoBehaviour
 
     public void Launch(Vector2 direction)
     {
-        rb.velocity = direction * bulletSpeed;    
+        bulletRb.velocity = direction * bulletSpeed;
+    }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.collider.GetComponent<Ruby>() != null) return;
+
+    //    Enemy enemy = collision.collider.GetComponent<Enemy>();
+
+    //    if(enemy != null)
+    //    {
+    //        enemy.Fix();
+    //    }
+
+    //    Destroy(gameObject);
+    //}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.Fix();
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

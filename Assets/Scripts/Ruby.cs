@@ -9,15 +9,23 @@ public class Ruby : MonoBehaviour
     private Animator rubyAnimation;
 
     [SerializeField]
+    private Rigidbody2D rubyRb;
+
+    //====MOVEMENT====
+    [SerializeField]
     private float moveSpeed;
 
     private float horizontalInput;
     private float verticalInput;
 
-    [SerializeField]
-    private Rigidbody2D rb;
-
     Vector2 lookDirection = new Vector2(1f, 0f);
+
+    //====Health====
+    private int maxHealth = 5;
+    private int currentHealth;
+    private float invincibleTime = 2f;
+    private float invincibleTimer;
+    private bool isInvincible;
     #endregion
 
     #region Bullet_variables
@@ -31,11 +39,23 @@ public class Ruby : MonoBehaviour
 
     void Start()
     {
-        rb.freezeRotation = true;
+        rubyRb.freezeRotation = true;
+        isInvincible = false;
+        invincibleTimer = 0;
     }
 
     void Update()
     {
+        //Check invincible time
+        if(isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if(invincibleTimer <= 0 )
+            {
+                isInvincible = false;
+            }
+        }
+
         //Get movement input
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
@@ -46,16 +66,16 @@ public class Ruby : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
+        rubyRb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
     }
 
     private void ActionControl()
     {
-        RunningControl();
-        AttackControl();
+        Run();
+        Attack();
     }
 
-    private void RunningControl()
+    private void Run()
     {
         Vector2 move = new Vector2(horizontalInput, verticalInput);
 
@@ -70,7 +90,7 @@ public class Ruby : MonoBehaviour
         rubyAnimation.SetFloat("Speed", move.magnitude);
     }
 
-    private void AttackControl()
+    private void Attack()
     {
         if (Input.GetKeyDown(shootKey))
         {
@@ -80,5 +100,22 @@ public class Ruby : MonoBehaviour
 
             rubyAnimation.SetTrigger("Launch");
         }
+    }
+
+    public void ChangeHealth(int changeAmount)
+    {
+        if(changeAmount < 0)
+        {
+            if (isInvincible) return;
+
+            isInvincible = true;
+            invincibleTimer = invincibleTime;
+
+            rubyAnimation.SetTrigger("Hit");
+
+            //Add particle
+        }
+
+        currentHealth = Mathf.Clamp(currentHealth + changeAmount, 0, maxHealth);
     }
 }
