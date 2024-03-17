@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ruby : MonoBehaviour
 {
@@ -29,6 +32,10 @@ public class Ruby : MonoBehaviour
     #endregion
 
     #region Bullet_variables
+    [SerializeField]
+    private int bulletAmount;
+    private int currentBulletAmount;
+
     [Header("Keybinds")]
     public KeyCode shootKey = KeyCode.J;
 
@@ -37,8 +44,26 @@ public class Ruby : MonoBehaviour
     public Transform launchOffSet;
     #endregion
 
+    [SerializeField]
+    private MaskableGraphic healthBar;
+    private float healthBarWidth, healthBarHeight;
+
+    private bool isActionable;
+
+    public static Ruby Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
+        isActionable = true;
+        healthBarWidth = healthBar.rectTransform.rect.width;
+        healthBarHeight = healthBar.rectTransform.rect.height;
+        currentBulletAmount = bulletAmount;
+        currentHealth = maxHealth;
         rubyRb.freezeRotation = true;
         isInvincible = false;
         invincibleTimer = 0;
@@ -47,10 +72,10 @@ public class Ruby : MonoBehaviour
     void Update()
     {
         //Check invincible time
-        if(isInvincible)
+        if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
-            if(invincibleTimer <= 0 )
+            if (invincibleTimer <= 0)
             {
                 isInvincible = false;
             }
@@ -62,7 +87,6 @@ public class Ruby : MonoBehaviour
 
         ActionControl();
     }
-
 
     private void FixedUpdate()
     {
@@ -94,28 +118,57 @@ public class Ruby : MonoBehaviour
     {
         if (Input.GetKeyDown(shootKey))
         {
-            GameObject projectileObject = Instantiate(bullet, launchOffSet.position, transform.rotation);
-            CogBullet cogBullet = projectileObject.GetComponent<CogBullet>();
-            cogBullet.Launch(lookDirection);
+            if (currentBulletAmount > 0)
+            {
+                currentBulletAmount--;
+                GameObject projectileObject = Instantiate(bullet, launchOffSet.position, transform.rotation);
+                CogBullet cogBullet = projectileObject.GetComponent<CogBullet>();
+                cogBullet.Launch(lookDirection);
 
-            rubyAnimation.SetTrigger("Launch");
+                rubyAnimation.SetTrigger("Launch");
+            }
         }
     }
 
     public void ChangeHealth(int changeAmount)
     {
-        if(changeAmount < 0)
+        if (currentHealth <= maxHealth && currentHealth > 0)
         {
-            if (isInvincible) return;
+            if (changeAmount < 0)
+            {
+                if (isInvincible) return;
 
-            isInvincible = true;
-            invincibleTimer = invincibleTime;
+                isInvincible = true;
+                invincibleTimer = invincibleTime;
 
-            rubyAnimation.SetTrigger("Hit");
+                rubyAnimation.SetTrigger("Hit");
 
-            //Add particle
+                //Add particle
+            }
+
+            if (changeAmount > 0 && currentHealth == maxHealth) throw new Exception("Health Full");
+
+            currentHealth = Mathf.Clamp(currentHealth + changeAmount, 0, maxHealth);
+            float remainHealthPercentage = (float)currentHealth / (float)maxHealth;
+            //Change size of healthbar
+            healthBar.rectTransform.sizeDelta = new Vector2(healthBarWidth * remainHealthPercentage, healthBarHeight);
         }
+        else
+        {
+            throw new Exception("Error: Health value out of the limit");
+        }
+    }
 
-        currentHealth = Mathf.Clamp(currentHealth + changeAmount, 0, maxHealth);
+    public void IncreaseAmmo()
+    {
+        if (currentBulletAmount < bulletAmount)
+            currentBulletAmount++;
+        else
+            throw new Exception("Ammo Full");
+    }
+
+    public void ChangeActionableState()
+    {
+        isActionable = !isActionable;
     }
 }

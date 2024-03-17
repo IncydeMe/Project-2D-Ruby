@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Enemy : MonoBehaviour
 {
     public GameObject target;
 
     #region Enemy
+    [SerializeField]
+    private Rigidbody2D enermyRb;
+    [SerializeField]
+    private Animator enemyAnimation;
+
+    //========Enermy Movement========
     public float moveSpeed;
     private Vector2 moveDirection;
 
     private float distance;
     [SerializeField]
     private float distanceBetween;
-    
-    [SerializeField]
-    private Rigidbody2D enermyRb;
-    [SerializeField]
-    private Animator enemyAnimation;
 
     [SerializeField]
     private float changeDirectionTime;
@@ -26,8 +28,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private bool isMoveHorizontal;
 
+    //========Enermy Status========
     private bool isFixed;
-    #endregion
 
     //========Enermy Type==========
     private enum Type
@@ -38,12 +40,13 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private Type enermyType;
+    #endregion
 
     private void Start()
     {
         isFixed = false;
         remainingChangeTIme = changeDirectionTime;
-        if(enermyType == Type.MOVE_AROUND)
+        if (enermyType == Type.MOVE_AROUND)
         {
             moveDirection = isMoveHorizontal ? Vector2.right * moveSpeed : Vector2.down * moveSpeed;
         }
@@ -51,7 +54,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(!isFixed)
+        if (!isFixed)
         {
             switch (enermyType)
             {
@@ -78,7 +81,7 @@ public class Enemy : MonoBehaviour
     {
         remainingChangeTIme -= Time.deltaTime;
 
-        if(remainingChangeTIme <= 0 )
+        if (remainingChangeTIme <= 0)
         {
             remainingChangeTIme += changeDirectionTime;
             moveDirection *= -1;
@@ -89,6 +92,7 @@ public class Enemy : MonoBehaviour
         enemyAnimation.SetFloat("Speed", 1);
     }
 
+    #region MovementTypeFunction
     private void Chase()
     {
         distance = Vector2.Distance(transform.position, target.transform.position);
@@ -113,6 +117,7 @@ public class Enemy : MonoBehaviour
     {
         moveDirection = Vector2.zero;
     }
+    #endregion
 
     public void Fix()
     {
@@ -121,7 +126,7 @@ public class Enemy : MonoBehaviour
 
         //Add particle
 
-        
+
         Destroy(gameObject, 2.5f);
     }
 
@@ -134,5 +139,12 @@ public class Enemy : MonoBehaviour
         {
             ruby.ChangeHealth(-1);
         }
+
+        StartCoroutine(AttackDelay());
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(2.5f);
     }
 }
