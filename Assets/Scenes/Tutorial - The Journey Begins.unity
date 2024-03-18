@@ -415,7 +415,7 @@ PrefabInstance:
     - target: {fileID: 7873082439323563100, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 319804535}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 273094194}
   - component: {fileID: 273094193}
   - component: {fileID: 273094195}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -500,7 +500,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 1.6953125, y: 1.65625, z: 0}
   m_MaxChunkCount: 16
@@ -66390,7 +66390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 435040475}
   - component: {fileID: 435040474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67115,7 +67115,7 @@ GameObject:
   - component: {fileID: 1987472069}
   - component: {fileID: 1987472071}
   - component: {fileID: 1987472070}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Decorators
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67154,7 +67154,7 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -67177,7 +67177,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -9
+  m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 6.0546875, y: 4.96875, z: 0}
   m_MaxChunkCount: 16
@@ -70290,8 +70290,8 @@ MonoBehaviour:
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_SoftZoneWidth: 0.12
+  m_SoftZoneHeight: 0.19
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
