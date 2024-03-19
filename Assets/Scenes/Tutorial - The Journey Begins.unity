@@ -416,6 +416,26 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 319804535}
+    - target: {fileID: 7873082439323563100, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+      propertyPath: bulletAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873082439323563100, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+      propertyPath: ammo.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873082439323563100, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+      propertyPath: ammo.Array.data[0]
+      value: 
+      objectReference: {fileID: 97841862}
+    - target: {fileID: 7873082439323563100, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+      propertyPath: ammo.Array.data[1]
+      value: 
+      objectReference: {fileID: 1393758634}
+    - target: {fileID: 7873082439323563100, guid: 4d4818e0759b10648880fd4fbb3da298, type: 3}
+      propertyPath: ammo.Array.data[2]
+      value: 
+      objectReference: {fileID: 2045079512}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

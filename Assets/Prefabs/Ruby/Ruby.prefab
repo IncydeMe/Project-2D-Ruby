@@ -160,6 +160,12 @@ MonoBehaviour:
   bulletRb: {fileID: 6973006779634431669, guid: 825f861cf66116b46b94f4e32f0b3f73, type: 3}
   launchOffSet: {fileID: 2651888008529510223}
   healthBar: {fileID: 0}
+  ammo:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!70 &8420568919838814656
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
