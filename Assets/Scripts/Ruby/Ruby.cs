@@ -44,9 +44,14 @@ public class Ruby : MonoBehaviour
     public Transform launchOffSet;
     #endregion
 
+    #region UI
     [SerializeField]
     private MaskableGraphic healthBar;
     private float healthBarWidth, healthBarHeight;
+
+    [SerializeField]
+    private GameObject[] ammo;
+    #endregion
 
     private bool isActionable;
 
@@ -96,6 +101,7 @@ public class Ruby : MonoBehaviour
     private void ActionControl()
     {
         Run();
+
         Attack();
     }
 
@@ -120,7 +126,11 @@ public class Ruby : MonoBehaviour
         {
             if (currentBulletAmount > 0)
             {
+                //Change bullet amount and bullet UI
                 currentBulletAmount--;
+                ammo[currentBulletAmount].gameObject.SetActive(false);
+
+                //Launch Bullet
                 GameObject projectileObject = Instantiate(bullet, launchOffSet.position, transform.rotation);
                 CogBullet cogBullet = projectileObject.GetComponent<CogBullet>();
                 cogBullet.Launch(lookDirection);
@@ -162,7 +172,10 @@ public class Ruby : MonoBehaviour
     public void IncreaseAmmo()
     {
         if (currentBulletAmount < bulletAmount)
+        {
+            ammo[currentBulletAmount].gameObject.SetActive(true);
             currentBulletAmount++;
+        }
         else
             throw new Exception("Ammo Full");
     }
