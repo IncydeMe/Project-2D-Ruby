@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial - The Journey Begins.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Level 1 - Nothingness.unity
+    guid: 4cf81d5e31ccf8d4cbb8c12e868ae1c8
+  - enabled: 1
+    path: Assets/Scenes/Level 2 - Luminiscence.unity
+    guid: 2edb77e54e7211e4082bba589eb219c9
+  - enabled: 1
+    path: Assets/Scenes/Level 3 - Confrontation.unity
+    guid: 070d8b44d0b4d8248b4cdc73abb493f9
   m_configObjects: {}

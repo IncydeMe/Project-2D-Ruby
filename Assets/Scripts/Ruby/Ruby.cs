@@ -51,6 +51,10 @@ public class Ruby : MonoBehaviour
 
     [SerializeField]
     private GameObject[] ammo;
+
+    [SerializeField]
+    private GameObject OwnCutScene;
+
     #endregion
 
     private bool isActionable;
@@ -90,12 +94,18 @@ public class Ruby : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        ActionControl();
+        if (isActionable)
+        {
+            ActionControl();
+        }
     }
 
     private void FixedUpdate()
     {
-        rubyRb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
+        if (isActionable)
+        {
+            rubyRb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
+        }
     }
 
     private void ActionControl()
@@ -165,7 +175,16 @@ public class Ruby : MonoBehaviour
         }
         else
         {
-            throw new Exception("Error: Health value out of the limit");
+            if (currentHealth > maxHealth)
+            {
+                throw new Exception("Error: Health value out of the limit");
+            }
+
+            if(currentHealth <= 0)
+            {
+                //Activate Cutscene
+                OwnCutScene.GetComponent<CutSceneActivate>().Activate();
+            }
         }
     }
 
