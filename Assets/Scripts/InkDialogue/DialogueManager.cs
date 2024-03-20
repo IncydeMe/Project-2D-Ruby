@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //Is there more to the story?
             if (story.canContinue)
@@ -40,7 +40,7 @@ public class DialogueManager : MonoBehaviour
                 AdvanceDialogue();
 
                 //Are there any choices?
-                if(story.currentChoices.Count > 0)
+                if (story.currentChoices.Count != 0)
                 {
                     StartCoroutine(ShowChoices());
                 }
@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("There are choices need to make here!");
         List<Choice> choices = story.currentChoices;
 
-        for(int i = 0; i< choices.Count; i++)
+        for (int i = 0; i < choices.Count; i++)
         {
             GameObject temp = Instantiate(customeButton, optionPanel.transform);
             temp.transform.GetChild(0).GetComponent<Text>().text = choices[i].text;
@@ -73,6 +73,10 @@ public class DialogueManager : MonoBehaviour
 
             yield return new WaitUntil(() =>
             {
+                if (choiceSelected != null)
+                {
+                    AdvanceFromDecision();
+                }
                 return choiceSelected != null;
             });
 
@@ -102,6 +106,11 @@ public class DialogueManager : MonoBehaviour
     //Finish the Story (Dialogue)
     private void FinishDialogue()
     {
+        optionPanel.SetActive(false);
+        for (int i = 0; i < optionPanel.transform.childCount; i++)
+        {
+            Destroy(optionPanel.transform.GetChild(i).gameObject);
+        }
         Debug.Log("End dialogue");
     }
 
@@ -109,7 +118,7 @@ public class DialogueManager : MonoBehaviour
     void AdvanceDialogue()
     {
         string currentSentence = story.Continue();
-        ParseTags();
+        //ParseTags();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(currentSentence));
     }
@@ -119,14 +128,13 @@ public class DialogueManager : MonoBehaviour
     {
         //Show message 
         message.text = "";
-        foreach(char letter in sentence.ToCharArray())
+        foreach (char letter in sentence.ToCharArray())
         {
             message.text += letter;
             yield return null;
         }
 
         //Idle character
-        
     }
 
 
@@ -137,15 +145,15 @@ public class DialogueManager : MonoBehaviour
     void ParseTags()
     {
         tags = story.currentTags;
-        foreach(string t in tags)
+        foreach (string t in tags)
         {
             string prefix = t.Split(' ')[0];
             string param = t.Split(" ")[1];
 
-            switch(prefix.ToLower())
+            switch (prefix.ToLower())
             {
                 case "anim":
-                   //Set animation
+                    //Set animation
                     break;
                 case "color":
                     //Set color of text
