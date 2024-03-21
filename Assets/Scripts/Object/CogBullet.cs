@@ -56,13 +56,18 @@ public class CogBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Enemy>() != null)
+        if (collision.GetComponent<Enemy>() != null || collision.GetComponent<WavedEnermy>() != null)
         {
             Enemy enemy = collision.GetComponent<Enemy>();
+            WavedEnermy wavedEnermy = collision.GetComponent<WavedEnermy>();
 
             if (enemy != null)
             {
                 enemy.Fix();
+            }
+            else
+            {
+                if (wavedEnermy != null) { wavedEnermy.Fix(); }
             }
 
             Destroy(gameObject);
