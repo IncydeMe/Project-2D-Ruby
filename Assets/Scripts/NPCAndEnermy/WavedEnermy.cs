@@ -81,6 +81,9 @@ public class WavedEnermy : MonoBehaviour
 
     public void Fix()
     {
+        this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
         enemyAnimation.SetTrigger("Fixed");
         isFixed = true;
 
