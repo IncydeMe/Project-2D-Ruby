@@ -10,6 +10,7 @@ public class Interactable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ruby"))
         {
+            Ruby.Instance.ChangeActionableState();
             isInteract = true;   
         }
     }
@@ -36,6 +37,7 @@ public class Interactable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ruby"))
         {
+            Ruby.Instance.ChangeActionableState();
             isInteract = false;
         }
     }

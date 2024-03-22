@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ruby : MonoBehaviour
+public class Ruby : MonoBehaviour, IDataPersistence
 {
     #region Ruby_Variables
     [SerializeField]
@@ -51,6 +51,20 @@ public class Ruby : MonoBehaviour
 
     [SerializeField]
     private GameObject[] ammo;
+
+    [SerializeField]
+    private GameObject deadCutScene;
+
+    [SerializeField]
+    private GameObject spawnCutScene;
+    #endregion
+
+    #region AudioClip
+    [SerializeField] private AudioClip shotBullet;
+    [SerializeField] private AudioClip collectItem;
+
+    [SerializeField] private AudioSource attackedSound;
+    [SerializeField] private AudioSource walkSound;
     #endregion
 
     private bool isActionable;
@@ -64,6 +78,9 @@ public class Ruby : MonoBehaviour
 
     void Start()
     {
+        //DataPersistenceManager.instance.LoadGame();
+        spawnCutScene.GetComponent<CutSceneActivate>().Activate();
+
         isActionable = true;
         healthBarWidth = healthBar.rectTransform.rect.width;
         healthBarHeight = healthBar.rectTransform.rect.height;
@@ -90,12 +107,18 @@ public class Ruby : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        ActionControl();
+        if (isActionable)
+        {
+            ActionControl();
+        }
     }
 
     private void FixedUpdate()
     {
-        rubyRb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
+        if (isActionable)
+        {
+            rubyRb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
+        }
     }
 
     private void ActionControl()
@@ -111,8 +134,13 @@ public class Ruby : MonoBehaviour
 
         if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
+            walkSound.enabled = true;
             lookDirection.Set(move.x, move.y);
             lookDirection.Normalize();
+        }
+        else
+        {
+            walkSound.enabled = false;
         }
 
         rubyAnimation.SetFloat("Look X", lookDirection.x);
@@ -135,6 +163,7 @@ public class Ruby : MonoBehaviour
                 CogBullet cogBullet = projectileObject.GetComponent<CogBullet>();
                 cogBullet.Launch(lookDirection);
 
+                AudioSource.PlayClipAtPoint(shotBullet, transform.position, 10f);
                 rubyAnimation.SetTrigger("Launch");
             }
         }
@@ -151,12 +180,13 @@ public class Ruby : MonoBehaviour
                 isInvincible = true;
                 invincibleTimer = invincibleTime;
 
+                attackedSound.PlayDelayed(0.1f);
                 rubyAnimation.SetTrigger("Hit");
-
-                //Add particle
             }
 
             if (changeAmount > 0 && currentHealth == maxHealth) throw new Exception("Health Full");
+
+            if (changeAmount > 0 && currentHealth != maxHealth) AudioSource.PlayClipAtPoint(collectItem, transform.position, 10f);
 
             currentHealth = Mathf.Clamp(currentHealth + changeAmount, 0, maxHealth);
             float remainHealthPercentage = (float)currentHealth / (float)maxHealth;
@@ -165,7 +195,16 @@ public class Ruby : MonoBehaviour
         }
         else
         {
-            throw new Exception("Error: Health value out of the limit");
+            if (currentHealth > maxHealth)
+            {
+                throw new Exception("Error: Health value out of the limit");
+            }
+
+            if (currentHealth <= 0)
+            {
+                //Activate Cutscene
+                deadCutScene.GetComponent<CutSceneActivate>().Activate();
+            }
         }
     }
 
@@ -173,6 +212,7 @@ public class Ruby : MonoBehaviour
     {
         if (currentBulletAmount < bulletAmount)
         {
+            AudioSource.PlayClipAtPoint(collectItem, transform.position, 10f);
             ammo[currentBulletAmount].gameObject.SetActive(true);
             currentBulletAmount++;
         }
@@ -184,4 +224,30 @@ public class Ruby : MonoBehaviour
     {
         isActionable = !isActionable;
     }
+
+    #region SaveLoadFunction
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+        this.currentHealth = data.playerHealth;
+        this.currentBulletAmount = data.bulletAmmo;
+
+        for(int i = bulletAmount - 1; i >= currentBulletAmount; i--)
+        {
+            ammo[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = this.transform.position;
+        data.playerHealth = this.currentHealth;
+        data.bulletAmmo = this.currentBulletAmount;
+
+        if (this.transform.position != new Vector3(-8.25f, -0.32f, 0))
+        {
+            data.isContinue = true;
+        }
+    }
+    #endregion
 }

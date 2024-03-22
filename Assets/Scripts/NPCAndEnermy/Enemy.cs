@@ -42,6 +42,9 @@ public class Enemy : MonoBehaviour
     private Type enermyType;
     #endregion
 
+    [SerializeField] private AudioSource walkSound;
+    [SerializeField] private AudioSource fixSound;
+
     private void Start()
     {
         isFixed = false;
@@ -90,6 +93,7 @@ public class Enemy : MonoBehaviour
         enemyAnimation.SetFloat("ForwardX", moveDirection.x);
         enemyAnimation.SetFloat("ForwardY", moveDirection.y);
         enemyAnimation.SetFloat("Speed", 1);
+        walkSound.enabled = true;
     }
 
     #region MovementTypeFunction
@@ -105,11 +109,13 @@ public class Enemy : MonoBehaviour
             enemyAnimation.SetFloat("ForwardX", direction.x);
             enemyAnimation.SetFloat("ForwardY", direction.y);
             enemyAnimation.SetFloat("Speed", 1);
+            walkSound.enabled = true;
         }
         else
         {
             enemyAnimation.SetFloat("Speed", 0);
             moveDirection = Vector2.zero;
+            walkSound.enabled = false;
         }
     }
 
@@ -124,6 +130,8 @@ public class Enemy : MonoBehaviour
         enemyAnimation.SetTrigger("Fixed");
         isFixed = true;
 
+        fixSound.Play();
+        walkSound.enabled = false;
         //Add particle
 
 

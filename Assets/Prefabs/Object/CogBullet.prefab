@@ -174,3 +174,6 @@ MonoBehaviour:
   bulletRb: {fileID: 6973006779634431669}
   bulletSpeed: 10
   maxLifeTime: 2.4
+  enermyHitSounds:
+  - {fileID: 0}
+  - {fileID: 0}
