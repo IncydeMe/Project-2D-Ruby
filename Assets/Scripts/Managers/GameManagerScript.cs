@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
-    public GameObject pausePanel;
+    public GameObject? pausePanel;
     private bool isPause = false;
 
     private void Update()

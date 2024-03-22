@@ -29,6 +29,12 @@ public class MenuSceneManager : MonoBehaviour, IDataPersistence
         SceneManager.LoadScene("Menu");
     }
 
+    public void NewGame()
+    {
+        DataPersistenceManager.instance.NewGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void Continue()
     {
         SceneManager.LoadScene(levelIndex);

@@ -20,24 +20,8 @@ public class WavedEnermy : MonoBehaviour
     [SerializeField]
     private float distanceBetween;
 
-    [SerializeField]
-    private float changeDirectionTime;
-    private float remainingChangeTIme;
-    [SerializeField]
-    private bool isMoveHorizontal;
-
     //========Enermy Status========
     private bool isFixed;
-
-    //========Enermy Type==========
-    private enum Type
-    {
-        CHASE,
-        MOVE_AROUND
-    }
-
-    [SerializeField]
-    private Type enermyType;
     #endregion
 
     [SerializeField] private AudioSource walkSound;
@@ -47,26 +31,13 @@ public class WavedEnermy : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Ruby");
         isFixed = false;
-        remainingChangeTIme = changeDirectionTime;
-        if (enermyType == Type.MOVE_AROUND)
-        {
-            moveDirection = isMoveHorizontal ? Vector2.right * moveSpeed : Vector2.down * moveSpeed;
-        }
     }
 
     void Update()
     {
         if (!isFixed)
         {
-            switch (enermyType)
-            {
-                case Type.CHASE:
-                    Chase();
-                    break;
-                case Type.MOVE_AROUND:
-                    MoveAround();
-                    break;
-            }
+            Chase();
         }
         else
         {
@@ -77,22 +48,6 @@ public class WavedEnermy : MonoBehaviour
     private void FixedUpdate()
     {
         enermyRb.velocity = moveDirection * moveSpeed * Time.deltaTime;
-    }
-
-    private void MoveAround()
-    {
-        remainingChangeTIme -= Time.deltaTime;
-
-        if (remainingChangeTIme <= 0)
-        {
-            remainingChangeTIme += changeDirectionTime;
-            moveDirection *= -1;
-        }
-
-        enemyAnimation.SetFloat("ForwardX", moveDirection.x);
-        enemyAnimation.SetFloat("ForwardY", moveDirection.y);
-        enemyAnimation.SetFloat("Speed", 1);
-        walkSound.enabled = true;
     }
 
     #region MovementTypeFunction

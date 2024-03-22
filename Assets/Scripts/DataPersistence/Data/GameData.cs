@@ -13,7 +13,7 @@ public class GameData
 
     public GameData()
     {
-        playerPosition = new Vector3(-8.25f, -0.32f,0);
+        playerPosition = Vector3.zero;
         bulletAmmo = 5;
         playerHealth = 5;
         sceneLevelIndex = 0;

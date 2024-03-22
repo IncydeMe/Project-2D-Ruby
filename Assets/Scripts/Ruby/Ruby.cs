@@ -53,10 +53,10 @@ public class Ruby : MonoBehaviour, IDataPersistence
     private GameObject[] ammo;
 
     [SerializeField]
-    private GameObject OwnCutScene;
+    private GameObject deadCutScene;
 
     [SerializeField]
-    private GameObject SpawnCutScene;
+    private GameObject spawnCutScene;
     #endregion
 
     #region AudioClip
@@ -79,7 +79,7 @@ public class Ruby : MonoBehaviour, IDataPersistence
     void Start()
     {
         //DataPersistenceManager.instance.LoadGame();
-        SpawnCutScene.GetComponent<CutSceneActivate>().Activate();
+        spawnCutScene.GetComponent<CutSceneActivate>().Activate();
 
         isActionable = true;
         healthBarWidth = healthBar.rectTransform.rect.width;
@@ -203,7 +203,7 @@ public class Ruby : MonoBehaviour, IDataPersistence
             if (currentHealth <= 0)
             {
                 //Activate Cutscene
-                OwnCutScene.GetComponent<CutSceneActivate>().Activate();
+                deadCutScene.GetComponent<CutSceneActivate>().Activate();
             }
         }
     }

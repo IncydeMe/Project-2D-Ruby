@@ -22,6 +22,7 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
     public void ResetLevel()
     {
         Time.timeScale = 1.0f;
+        DataPersistenceManager.instance.NewGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

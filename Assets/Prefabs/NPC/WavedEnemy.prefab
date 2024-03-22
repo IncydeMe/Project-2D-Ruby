@@ -331,10 +331,7 @@ MonoBehaviour:
   enermyRb: {fileID: 4421132914970239280}
   enemyAnimation: {fileID: 133187341751018155}
   moveSpeed: 10
-  distanceBetween: 50
-  changeDirectionTime: 0
-  isMoveHorizontal: 1
-  enermyType: 0
+  distanceBetween: 70
   walkSound: {fileID: 1761850450541394175}
   fixSound: {fileID: 4625478594707388904}
 --- !u!1 &8653011792580310517

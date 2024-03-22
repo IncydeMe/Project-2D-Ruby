@@ -278,8 +278,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  OwnCutScene: {fileID: 5641269382581656324}
-  SpawnCutScene: {fileID: 1348746974637251399}
+  deadCutScene: {fileID: 5641269382581656324}
+  spawnCutScene: {fileID: 1348746974637251399}
   shotBullet: {fileID: 8300000, guid: b2edfd40873655249ba0e01a5cf705be, type: 3}
   collectItem: {fileID: 8300000, guid: af5f8b64e3f58f24c87ff8f789b04f6c, type: 3}
   attackedSound: {fileID: 8604270998900030466}
