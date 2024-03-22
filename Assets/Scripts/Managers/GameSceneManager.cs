@@ -45,6 +45,13 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
         Application.Quit(); 
     }
 
+    public void FinishGame()
+    {
+        Time.timeScale = 1.0f;
+        DataPersistenceManager.instance.NewGame();
+        SceneManager.LoadScene("Menu");
+    }
+
     //Save and load current scene in playing
     public void LoadData(GameData data)
     {
