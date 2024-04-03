@@ -1,4 +1,4 @@
-Project Ruby
+# Project Ruby
 
 Inspired from the original concept of Project Ruby, this is a take on the journey of Ruby through the sea of painful truth
 
